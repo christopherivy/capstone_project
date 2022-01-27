@@ -2132,8 +2132,17 @@ label {
     padding: 175px 0 120px;
 }
 
+
+/* ORIGINAL
 .movie-details-img {
     position: relative;
+}
+*/
+
+.movie-details-img1 {
+    position: relative;
+    width: 303px;
+    height: 430px;
 }
 
 .movie-details-img .popup-video {

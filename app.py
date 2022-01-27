@@ -5,7 +5,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 import json
 import requests
-from seed import hc_250shows, hc_250_movies, hc_most_popular_movies, hc_box_office_movies
+from seed import hc_250shows, hc_250_movies, hc_most_popular_movies, hc_box_office_movies, hc_movie_details
 
 from forms import UserAddForm, LoginForm, SearchForm
 from model import db, connect_db, User
@@ -60,6 +60,8 @@ def home_page():
 	# shows = res.json()
 	# print(shows['items'][0][''image''])
 
+	# call a trailer function here------------------------------------------------------
+
 	shows = hc_250shows
 	movies = hc_most_popular_movies
 	box_movies = hc_box_office_movies
@@ -70,6 +72,13 @@ def home_page():
 
 @app.route('/movie_details/<movie_id>',  methods=['GET'])
 def movie_details(movie_id):
-	flash(movie_id)
+	# flash(movie_id)
 
-	return render_template("movie-details.html")
+	# create obj to hold movie details
+	movie_details = hc_movie_details
+
+	# hit api for movie id
+	# set movie details = response
+
+
+	return render_template("movie_details.html", movie_details=movie_details)
