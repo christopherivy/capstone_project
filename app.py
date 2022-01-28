@@ -66,7 +66,6 @@ def home_page():
 	movies = hc_most_popular_movies
 	box_movies = hc_box_office_movies
 	
-
 	return render_template("index.html", shows=shows['items'], movies = movies['items'], box_movies=box_movies['items'])
 
 
@@ -75,10 +74,16 @@ def movie_details(movie_id):
 	# flash(movie_id)
 
 	# create obj to hold movie details
-	movie_details = hc_movie_details
+	# movie_details = hc_movie_details
+	# movie_details_similars = hc_movie_details['similars']
+
+	# https://imdb-api.com/en/API/Title/k_ybkbttjb/
+	res = requests.get(f'{API_BASE_URL_TITLE}{movie_id}/Trailer,')
+	movie_details = res.json()
 
 	# hit api for movie id
 	# set movie details = response
+
 
 
 	return render_template("movie_details.html", movie_details=movie_details)
