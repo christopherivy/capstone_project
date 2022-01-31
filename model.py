@@ -84,7 +84,6 @@ class User(db.Model):
 
 # class Movies
 
-
 def connect_db(app):
     """Connect this database to provided Flask app.
 

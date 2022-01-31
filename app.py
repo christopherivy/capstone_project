@@ -84,6 +84,29 @@ def movie_details(movie_id):
 	# hit api for movie id
 	# set movie details = response
 
-
-
 	return render_template("movie_details.html", movie_details=movie_details)
+
+
+# handle user login
+@app.route("/sign_in", methods=["GET", "POST"])
+def login():
+    """Handle user login."""
+
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = User.authenticate(form.username.data, form.password.data)
+
+        if user:
+            do_login(user)
+            flash(f"Hello, {user.username}!", "success")
+            return redirect("/")
+
+        flash("Invalid credentials.", "danger")
+
+    return render_template("sign_in.html", form=form)
+
+def do_login(user):
+	"""Log in user."""
+
+	session[CURR_USER_KEY] = user.id
