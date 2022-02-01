@@ -1,7 +1,6 @@
  {% extends 'base.html' %} {% block content %}
 
 
-<h1>Movie details page</h1>
 
 <body>
 
@@ -51,8 +50,8 @@
                                         <!-- <a href="#">Drama</a> -->
                                     </li>
                                     <li class="release-time">
-                                        <span><i class="far fa-calendar-alt"></i> {{movie_details.year}}</span>
-                                        <span><i class="far fa-clock"></i> {{movie_details.runtimeMins}}min</span>
+                                        <span><i class="far fa-calendar-alt"></i> {{movie_details.year}}</span> {% if movie_details.runtimeMins is not none %}
+                                        <span><i class="far fa-clock"></i> {{movie_details.runtimeMins}} minutes</span> {% endif %}
                                     </li>
                                 </ul>
                             </div>
@@ -177,7 +176,7 @@
                     <div class="col-xl-3 col-lg-4 col-sm-6">
                         <div class="movie-item mb-50">
                             <div class="movie-poster">
-                                <a href="movie-details.html"><img src="{{similar.image}}" alt=""></a>
+                                <a href="/movie_details/{{similar.id}}"><img src="{{similar.image}}" alt=""></a>
                             </div>
                             <div class="movie-content">
                                 <div class="top">

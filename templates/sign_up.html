@@ -3,21 +3,19 @@
 <div class="row justify-content-md-center">
     <div class="col-md-7 col-lg-5">
 
-        <h2 class="join-message">Welcome back.</h2>
+        <h2 class="join-message">Create an account</h2>
         <form method="POST" id="search_form">
             {{ form.hidden_tag() }} {% for field in form if field.widget.input_type != 'hidden' %} {% for error in field.errors %}
             <span class="login-btn text-danger">{{ error }}</span> {% endfor %} {{ field(placeholder=field.label.text, class="form-control") }}
             <br/> {% endfor %}
 
             <br>
-            <button class="btn btn-primary btn-block btn-lg">Sign in</button>
+            <button class="btn btn-primary btn-block btn-lg">Sign up</button>
             <br>
             <br>
-            <a href="/sign_up">Not a member? Sign up here.</a>
+            <a href="/sign_in">Already a member? Sign in here.</a>
             <br>
         </form>
     </div>
 </div>
-
-
 {% endblock%}

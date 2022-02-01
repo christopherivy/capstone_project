@@ -110,3 +110,48 @@ def do_login(user):
 	"""Log in user."""
 
 	session[CURR_USER_KEY] = user.id
+
+
+# handle user signup
+@app.route("/sign_up", methods=["GET", "POST"])
+def signup():
+    #  create user form
+    form = UserAddForm()
+
+    if form.validate_on_submit():
+        try:
+            user = User.signup(
+                username=form.username.data,
+                password=form.password.data,
+                email=form.email.data,
+                image_url=form.image_url.data or User.image_url.default.arg,
+            )
+            db.session.commit()
+
+        except IntegrityError as e:
+            flash("Username already taken", "danger")
+            return render_template("sign_up.html", form=form)
+
+        do_login(user)
+
+        return redirect("/")
+
+    else:
+        return render_template("sign_up.html", form=form)
+
+
+@app.route("/log_out")
+def logout():
+    """Handle logout of user."""
+
+    do_logout()
+
+    flash("You have successfully logged out.", "success")
+    return redirect("/sign_in")
+
+
+def do_logout():
+    """Logout user."""
+
+    if CURR_USER_KEY in session:
+        del session[CURR_USER_KEY]
