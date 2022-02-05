@@ -18,6 +18,10 @@ API_BASE_URL_SEARCH = "https://imdb-api.com/en/API/SearchMovie/k_ybkbttjb/"
 API_BASE_URL_TITLE = "https://imdb-api.com/en/API/Title/k_ybkbttjb/"
 API_BASE_COMING_SOON = 'https://imdb-api.com/en/API/ComingSoon/k_ybkbttjb/'
 API_BASE_TOP_TV = 'https://imdb-api.com/en/API/Top250TVs/k_ybkbttjb'
+API_BASE_TOP_MOVIES = 'https://imdb-api.com/en/API/Top250Movies/k_ybkbttjb/'
+API_BASE_POPULAR_MOVIES = 'https://imdb-api.com/en/API/BoxOffice/k_ybkbttjb'
+
+
 app = Flask(__name__)
 
 # Get DB_URI from environ variable (useful for production/testing) or,
@@ -52,19 +56,25 @@ def home_page():
 
 
 		# this is hitting the api
-	# res = requests.get(API_BASE_COMING_SOON)
-	# coming_soon = res.json()
-	# print(coming_soon['items'][0]['id'], '<<<<THIS IS IT')
+	res = requests.get(API_BASE_COMING_SOON)
+	coming_soon = res.json()
 
-	# res = requests.get(API_BASE_TOP_TV)
-	# shows = res.json()
-	# print(shows['items'][0][''image''])
+	res = requests.get(API_BASE_TOP_TV)
+	shows = res.json()
 
-	# call a trailer function here------------------------------------------------------
+	res = requests.get(API_BASE_TOP_MOVIES)
+	movies = res.json()
 
-	shows = hc_250shows
-	movies = hc_most_popular_movies
-	box_movies = hc_box_office_movies
+	res = requests.get(API_BASE_POPULAR_MOVIES)
+	box_movies = res.json()
+
+
+    
+    # for manual testing of api
+    # shows = hc_250shows
+    # movies = hc_most_popular_movies
+    # box_movies = hc_box_office_movies
+
 	
 	return render_template("index.html", shows=shows['items'], movies = movies['items'], box_movies=box_movies['items'])
 
